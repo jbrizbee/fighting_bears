@@ -1,4 +1,5 @@
 // call the packages we need
+var http = require('http');
 var express = require('express')  //import express from 'express';    // call express
 var bodyParser = require('body-parser');  //import bodyParser from 'body-parser';   // define our app using express
 var mongoose = require('mongoose');
@@ -13,7 +14,14 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 8080;    // set our port
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+
+var port = 4000;    // set our port
 
 // ROUTES FOR OUR API
 var router = express.Router();    // get an instance of the express Router
