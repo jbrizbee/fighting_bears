@@ -17,7 +17,7 @@ class BearStore extends React.Component {
 
     axios.get('http://localhost:4000/api/bears').then(res => {
       const bearNameArr = res.data.map(bear =>
-        <ul style={{
+        <ul key={bear.name} style={{
                'fontFamily': 'HelveticaNeue-UltraLight',
                'padding': '2em',
                'borderRadius': '7px',
@@ -44,7 +44,6 @@ class BearStore extends React.Component {
   }
 
   render() {
-    console.log(this);
     return (
       <div className="holdingContainer">
       <h1>Fighting Bears!</h1>

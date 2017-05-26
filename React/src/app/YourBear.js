@@ -7,40 +7,39 @@ class YourBear extends React.Component {
     super(props);
 
     this.state = {
-      name: "",
-      age: "",
-      attack: "",
-      color: "",
-      FavFood: ""
+      bear: {
+        name: '',
+        age: '',
+        attack: '',
+        color: '',
+        FavFood: ''
+      }
     };
 
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-  handleChange(event) {
-    this.setState({
-      name: event.target.value,
-      age: event.target.value,
-      attack: event.target.value,
-      color: event.target.value,
-      FavFood: event.target.value
-    });
+  handleChange(propertyName, event) {
+    const bear = this.state.bear;
+    bear[propertyName] = event.target.value;
+    this.setState({ bear: bear});
   }
 
   handleSubmit(event) {
+    // axios.post('http://localhost:4000/api/bears').then(res => {
+    //
+    // });
     event.preventDefault();
   }
 
   render() {
     return(
       <form onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="name" value={this.state.name} onChange={this.handleChange}/>
-        <input type="text" placeholder="age" value={this.state.age} onChange={this.handleChange}/>
-        <input type="text" placeholder="attack" value={this.state.attack} onChange={this.handleChange}/>
-        <input type="text" placeholder="color" value={this.state.color} onChange={this.handleChange}/>
-        <input type="text" placeholder="Favorite Food" value={this.state.FavFood} onChange={this.handleChange}/>
-        <input type="submit" value="submit"/>
+        <input type="text" placeholder="name" value={this.state.bear.name} onChange={this.handleChange.bind(this, 'name')}/>
+        <input type="text" placeholder="age" value={this.state.bear.age} onChange={this.handleChange.bind(this, 'age')}/>
+        <input type="text" placeholder="attack" value={this.state.bear.attack} onChange={this.handleChange.bind(this, 'attack')}/>
+        <input type="text" placeholder="color" value={this.state.bear.color} onChange={this.handleChange.bind(this, 'color')}/>
+        <input type="text" placeholder="Favorite Food" value={this.state.bear.FavFood} onChange={this.handleChange.bind(this, 'FavFood')}/>
+        <input type="submit" value="Create Bear!"/>
       </form>
     );
   }
